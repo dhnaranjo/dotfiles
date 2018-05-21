@@ -31,19 +31,20 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Install ZSH
+# Update homebrew recipes
+brew update
+
+# Check for and install ZSH
+brew install zsh
+brew install zsh-completions
 if ! test $SHELL == $(which zsh); then
-  brew install zsh
-  brew install zsh-completions
   echo "$(which zsh)" | sudo tee -a /etc/shells
   chsh -s $(which zsh)
 
-  ScriptLoc=$(readlink -f "$0")
-  exec "$ScriptLoc"
+  echo "Please relaunch your shell and re-run the script"
+  exit
 fi
 
-# Update homebrew recipes
-brew update
 
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
