@@ -35,7 +35,7 @@ fi
 if ! test $SHELL == $(which zsh); then
   brew install zsh
   brew install zsh-completions
-  sudo echo "$(which zsh)" >> /etc/shells
+  echo "$(which zsh)" | sudo tee -a /etc/shells
   chsh -s $(which zsh)
 
   ScriptLoc=$(readlink -f "$0")
