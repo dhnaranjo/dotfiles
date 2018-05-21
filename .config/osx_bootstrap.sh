@@ -124,13 +124,13 @@ FONTS=(
 )
 brew cask install ${FONTS[@]}
 
-echo "Installing Python packages..."
-PYTHON_PACKAGES=(
-  ipython
-  virtualenv
-  virtualenvwrapper
-)
-sudo pip install ${PYTHON_PACKAGES[@]}
+# echo "Installing Python packages..."
+# PYTHON_PACKAGES=(
+#   ipython
+#   virtualenv
+#   virtualenvwrapper
+# )
+# pip install ${PYTHON_PACKAGES[@]}
 
 echo "Installing Ruby and gems"+
 RUBY_VERSIONS=(
@@ -142,7 +142,7 @@ RUBY_GEMS=(
 )
 rbenv init
 rbenv install ${RUBY_VERSIONS[@]}
-sudo gem install ${RUBY_GEMS[@]}
+gem install ${RUBY_GEMS[@]}
 
 echo "Installing node and global npm packages..."
 nvm install node

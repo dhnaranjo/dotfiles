@@ -104,7 +104,7 @@ bindkey "^[OB" history-search-forward
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-alias config='git --git-dir=$HOME/.config_repo/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 compdef config='git'
 
 setopt complete_aliases
