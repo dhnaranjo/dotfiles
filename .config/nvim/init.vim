@@ -3,6 +3,8 @@ if &compatible
 endif
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
+source ~/.config/nvim/osx.vim
+
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
 

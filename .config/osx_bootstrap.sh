@@ -38,6 +38,7 @@ brew update
 brew install zsh
 brew install zsh-completions
 if ! test $SHELL == $(which zsh); then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   echo "$(which zsh)" | sudo tee -a /etc/shells
   chsh -s $(which zsh)
 
@@ -52,7 +53,6 @@ brew install gnu-sed --with-default-names
 brew install gnu-tar --with-default-names
 brew install gnu-indent --with-default-names
 brew install gnu-which --with-default-names
-brew install gnu-grep --with-default-names
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
@@ -117,13 +117,15 @@ CASKS=(
 echo "Installing cask apps..."
 brew cask install --appdir=$HOME/Applications ${CASKS[@]}
 
+# Installing Alacritty
+brew tap mscharley/homebrew
+brew install --appdir=$HOME/Applications --HEAD alacritty
+ln -s /usr/local/opt/alacritty/Applications/Alacritty.app $HOME/Applications/Alacritty.app
+
 echo "Installing fonts..."
 brew tap caskroom/fonts
 FONTS=(
   font-source-code-pro
-  font-inconsolidata
-  font-roboto
-  font-clear-sans
 )
 brew cask install ${FONTS[@]}
 
@@ -159,6 +161,11 @@ nvm install node
 nvm use node
 NPM_PACKAGES=(
 )
+
+echo "Configuring Neovim"
+if [ ! -d "$HOME/.cache/dein" ]; then
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | bash -s $HOME/.cache/dein
+fi
 
 echo "Configuring OSX..."
 
