@@ -31,11 +31,21 @@ if test ! $(which brew); then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Install ZSH
+if ! test $SHELL == $(which zsh); then
+  brew install zsh
+  brew install zsh-completions
+  echo "$(which zsh)" | sudo tee -a /etc/shells
+  chsh -s $(which zsh)
+
+  ScriptLoc=$(readlink -f "$0")
+  exec "$ScriptLoc"
+fi
+
 # Update homebrew recipes
 brew update
 
 # Install GNU core utilities (those that come with OS X are outdated)
-brew tap homebrew/dupes
 brew install coreutils
 brew install gnu-sed --with-default-names
 brew install gnu-tar --with-default-names
@@ -48,11 +58,6 @@ brew install findutils
 
 # Install Bash 4
 brew install bash
-
-# Install ZSH
-brew install zsh
-brew install zsh-completions
-chsh -s $(which zsh)
 
 PACKAGES=(
   ack
