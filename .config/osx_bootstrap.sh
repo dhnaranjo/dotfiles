@@ -71,8 +71,6 @@ PACKAGES=(
   markdown
   memcached
   neovim
-  npm
-  nvm
   pkg-config
   postgresql
   pypy
@@ -89,7 +87,6 @@ PACKAGES=(
   rbenv
   ruby-build
   ripgrep
-  yarn --without-node
 )
 
 echo "Installing packages..."
@@ -99,20 +96,20 @@ echo "Cleaning up..."
 brew cleanup
 
 echo "Installing cask..."
-brew install caskroom/cask/brew-cask
+mkdir $HOME/Applications
 
 CASKS=(
   firefox
   flux
   google-chrome
-  google-drive
+  google-backup-and-sync
   slack
   virtualbox
   vlc
 )
 
 echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+brew cask install --appdir=$HOME/Applications ${CASKS[@]}
 
 echo "Installing fonts..."
 brew tap caskroom/fonts
@@ -142,9 +139,16 @@ RUBY_GEMS=(
 )
 rbenv init
 rbenv install ${RUBY_VERSIONS[@]}
+rbenv global ${RUBY_VERSIONS[0]}
 gem install ${RUBY_GEMS[@]}
 
 echo "Installing node and global npm packages..."
+brew install nvm
+brew install npm
+brew install yarn --without-node
+
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 nvm install node
 nvm use node
 NPM_PACKAGES=(
