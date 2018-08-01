@@ -60,13 +60,17 @@ endif
 
 filetype plugin indent on
 set hidden
-syntax enable
+syntax on
 set mouse=a
 set clipboard=unnamed
 set updatetime=100
 
 set tabstop=2 expandtab shiftwidth=2 smarttab
 set inccommand=split
+
+""" Reload file from disk on git change
+set autoread
+au FocusGained,BufEnter * :checktime
 
 """ Key bindings
 map <space> <leader>

@@ -95,7 +95,6 @@ eval "$(rbenv init -)"
 
 bindkey -v
 
-alias clicks="kubectl -n clicks-rails"
 REPORTTIME=5
 
 bindkey "^[OA" history-search-backward
@@ -104,7 +103,10 @@ bindkey "^[OB" history-search-forward
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+autoload -U compinit && compinit
+
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 compdef config='git'
 
 setopt complete_aliases
+alias mux='tmuxinator'
